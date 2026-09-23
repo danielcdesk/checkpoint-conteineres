@@ -349,7 +349,7 @@ def montar_interface():
     quadro_acoes.grid(row=4, column=0, sticky="e", pady=(12, 0))
     ttk.Button(
         quadro_acoes,
-        text="Encerrar e mostrar resumo",
+        text="Encerrar e ver resumo",
         style="Acao.TButton",
         command=encerrar,
     ).grid(row=0, column=0)
