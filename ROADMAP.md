@@ -16,6 +16,10 @@
 - Conferir que não há dados pessoais, documentos institucionais ou credenciais no conteúdo público.
 - Conferir no GitHub que o commit e os arquivos foram enviados para a branch `main`.
 
+## Colaboração do grupo
+
+- Registrar revisões do grupo em commits separados, sem incluir dados pessoais.
+
 ## Limite de escopo
 
 Este projeto representa uma simulação acadêmica. Não inclui persistência de dados, autenticação, integração externa ou recursos de operação logística real, pois eles não fazem parte do cenário definido para a atividade.
