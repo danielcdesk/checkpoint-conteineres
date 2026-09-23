@@ -23,3 +23,7 @@ Aplicação acadêmica em Python para organizar contêineres recém-chegados em 
 ## Privacidade
 
 Não registrar neste repositório dados de integrantes, matrículas, documentos da instituição, imagens da entrega ou credenciais.
+
+## Colaboração
+
+- O histórico do repositório registra contribuições individuais da equipe sem expor dados pessoais.
