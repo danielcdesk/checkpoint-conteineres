@@ -1,29 +1,43 @@
-# Controle de Contêineres
+# 🚢 Controle de Contêineres
 
-Projeto acadêmico de Programação 2 para aplicar lógica estruturada/procedural, matrizes e interface gráfica em Python.
+Aplicação acadêmica desenvolvida em **Python** para a disciplina **Programação 2**. O projeto simula o controle de um pátio logístico usando uma matriz, regras de negócio explícitas e uma interface gráfica desktop com Tkinter.
 
-## Proposta
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Interface](https://img.shields.io/badge/Interface-Tkinter-2F6FA3)](https://docs.python.org/3/library/tkinter.html)
+[![Paradigma](https://img.shields.io/badge/Paradigma-Procedural-5B8C5A)](#-requisitos-atendidos)
+[![Status](https://img.shields.io/badge/Status-Checkpoint%203-6C63FF)](#-execução)
 
-O programa representa um pátio logístico por uma matriz de 5 linhas e 6 colunas. Cada uma das 30 posições tem um estado:
+## 🎯 Objetivo
 
-- `0`: posição livre;
-- `1`: posição ocupada.
+Representar visualmente um pátio com **5 linhas × 6 colunas**, totalizando **30 posições**. A matriz é a fonte de verdade do sistema:
 
-Ao informar uma identificação e clicar em uma posição livre, o sistema registra a chegada do contêiner. Ao clicar em uma posição ocupada, solicita confirmação e registra a saída. Os totais são atualizados após cada operação e um resumo é exibido antes de encerrar.
+- `0` → posição livre;
+- `1` → posição ocupada.
 
-## Requisitos atendidos
+A interação é direta: o usuário informa a identificação do contêiner e clica na posição desejada. O programa valida a operação, atualiza a matriz e mantém os indicadores da tela sincronizados.
 
-- Python com `tkinter` e `tkinter.ttk`;
-- estilo nativo configurado com `ttk.Style`;
-- paradigma procedural, sem classes próprias;
-- matriz 5 x 6 como fonte de verdade do estado do pátio;
-- validações por `messagebox`;
-- layout organizado com `grid` e `pack`;
-- comentários pedagógicos no código para estruturas de controle e recursos de alto nível.
+## ✨ Funcionalidades
 
-## Como executar
+- 🟢 Registro de chegada em uma posição livre;
+- 🔴 Registro de saída com confirmação do usuário;
+- 🧾 Identificação armazenada em cada posição ocupada;
+- 🛡️ Bloqueio de identificações duplicadas;
+- 📊 Atualização imediata de posições ocupadas, livres e chegadas;
+- 🧭 Visualização das posições no formato `A1` até `E6`;
+- 📋 Resumo final com a situação do pátio ao encerrar;
+- 🎨 Interface organizada com widgets `ttk`, estilo nativo, cores e legenda visual.
 
-O projeto não requer bibliotecas externas.
+## 🖥️ Como usar
+
+1. Digite a identificação do contêiner.
+2. Clique em uma posição marcada como **LIVRE**.
+3. Para liberar uma posição **OCUPADA**, clique nela e confirme a saída.
+4. Consulte os cartões de ocupação, disponibilidade e movimentação.
+5. Clique em **Encerrar e ver resumo** para visualizar o estado final.
+
+## ⚙️ Execução
+
+O projeto não utiliza bibliotecas externas. É necessário ter **Python 3** com suporte ao Tkinter.
 
 ```powershell
 git clone https://github.com/danielcdesk/checkpoint-conteineres.git
@@ -31,32 +45,51 @@ cd checkpoint-conteineres
 py main.py
 ```
 
-Também é possível executar com `python main.py` quando esse comando apontar para uma instalação do Python 3 com Tkinter.
+Se o comando `py` não estiver disponível, use:
 
-## Estrutura
+```powershell
+python main.py
+```
+
+## 🧩 Requisitos atendidos
+
+- Python com `tkinter` e `tkinter.ttk`;
+- estilo nativo configurado com `ttk.Style`;
+- paradigma estritamente procedural, sem classes próprias;
+- matriz 5 × 6 como fonte de verdade do pátio;
+- validações e confirmações com `messagebox`;
+- organização visual com os gerenciadores `grid` e `pack`;
+- comentários pedagógicos sobre estruturas de controle e funções nativas de alto nível.
+
+## 📁 Estrutura do projeto
 
 ```text
 checkpoint-conteineres/
-├── MEMORY.md
-├── ROADMAP.md
-├── README.md
-├── main.py
+├── main.py                 # Interface e lógica principal
+├── README.md               # Documentação do projeto
+├── REGRA_DE_NEGOCIO.md     # Fluxos e regras no formato Dado Quando Então
+├── ROADMAP.md              # Planejamento de evoluções
+├── MEMORY.md               # Memória de trabalho e contexto arquitetural
 └── ia/
-    └── Prompt Python.md
+    └── Prompt Python.md    # Especificação pedagógica utilizada no projeto
 ```
 
-O arquivo `REGRA_DE_NEGOCIO.md` complementa a documentação com os fluxos Dado Quando Então usados pelo projeto.
+## 🧪 Verificação local
 
-## Privacidade
-
-Esta versão pública não inclui nomes de integrantes, matrículas, documentos institucionais, capturas de tela, senhas, tokens ou chaves de API.
-
-## Verificação técnica
-
-Antes de cada entrega, execute:
+Para verificar a sintaxe do código, execute:
 
 ```powershell
 python -m py_compile main.py
 ```
 
-Esse comando verifica a sintaxe do arquivo. A interface deve ser aberta em um ambiente gráfico para testar manualmente os cliques e as caixas de diálogo.
+Depois, abra a aplicação em um ambiente gráfico para conferir os cliques, as validações, as caixas de diálogo e o resumo final.
+
+## 🔒 Privacidade
+
+O repositório público foi mantido sem nomes completos de integrantes, matrículas, documentos institucionais, capturas de tela, senhas, tokens ou chaves de API. As informações de equipe pertencem somente ao arquivo privado de entrega, quando necessário.
+
+## 📌 Repositório
+
+🔗 [github.com/danielcdesk/checkpoint-conteineres](https://github.com/danielcdesk/checkpoint-conteineres)
+
+Projeto acadêmico desenvolvido para o Checkpoint 3 de Programação 2.
