@@ -247,7 +247,7 @@ def montar_interface():
     ).pack(anchor="w")
     ttk.Label(
         quadro_cabecalho,
-        text="Pátio logístico acadêmico • matriz 5 x 6 com 30 posições",
+        text="Acompanhe entradas, saídas e disponibilidade do pátio em um só lugar.",
         style="Subtitulo.TLabel",
     ).pack(anchor="w", pady=(4, 0))
 
