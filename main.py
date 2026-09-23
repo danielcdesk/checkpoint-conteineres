@@ -178,10 +178,58 @@ def montar_interface():
     estilo = ttk.Style()
     # theme_use() consulta o tema nativo ativo antes de configurar estilos ttk.
     estilo.theme_use(estilo.theme_use())
-    estilo.configure("Titulo.TLabel", font=("Segoe UI", 16, "bold"))
-    estilo.configure("Subtitulo.TLabel", font=("Segoe UI", 10))
-    estilo.configure("Livre.TButton", padding=(8, 12))
-    estilo.configure("Ocupada.TButton", padding=(8, 12))
+    estilo.configure(
+        "Cabecalho.TFrame",
+        background="#e8f1fb",
+    )
+    estilo.configure(
+        "Titulo.TLabel",
+        background="#e8f1fb",
+        foreground="#16324f",
+        font=("Segoe UI", 18, "bold"),
+    )
+    estilo.configure(
+        "Subtitulo.TLabel",
+        background="#e8f1fb",
+        foreground="#45617d",
+        font=("Segoe UI", 10),
+    )
+    estilo.configure(
+        "Cartao.TLabelframe",
+        foreground="#27445f",
+    )
+    estilo.configure(
+        "CartaoValor.TLabel",
+        foreground="#16324f",
+        font=("Segoe UI", 10, "bold"),
+    )
+    estilo.configure(
+        "LegendaLivre.TLabel",
+        foreground="#247a4b",
+        font=("Segoe UI", 9, "bold"),
+    )
+    estilo.configure(
+        "LegendaOcupada.TLabel",
+        foreground="#b43b3b",
+        font=("Segoe UI", 9, "bold"),
+    )
+    estilo.configure(
+        "Livre.TButton",
+        padding=(8, 14),
+        foreground="#247a4b",
+        font=("Segoe UI", 10, "bold"),
+    )
+    estilo.configure(
+        "Ocupada.TButton",
+        padding=(8, 14),
+        foreground="#b43b3b",
+        font=("Segoe UI", 10, "bold"),
+    )
+    estilo.configure(
+        "Acao.TButton",
+        padding=(12, 8),
+        font=("Segoe UI", 10, "bold"),
+    )
 
     quadro_principal = ttk.Frame(janela, padding=16)
     # pack() encaixa o quadro principal na janela e permite ocupar o espaço disponível.
@@ -189,20 +237,28 @@ def montar_interface():
     # columnconfigure() permite que a coluna se expanda quando a janela aumentar.
     quadro_principal.columnconfigure(0, weight=1)
 
+    # O cabeçalho cria uma hierarquia visual sem alterar o fluxo procedural.
+    quadro_cabecalho = ttk.Frame(quadro_principal, padding=(18, 14), style="Cabecalho.TFrame")
+    quadro_cabecalho.grid(row=0, column=0, sticky="ew", pady=(0, 14))
     ttk.Label(
-        quadro_principal,
-        text="Organização de Contêineres em Pátio Logístico",
+        quadro_cabecalho,
+        text="Controle de Contêineres",
         style="Titulo.TLabel",
-    ).grid(row=0, column=0, sticky="w")
+    ).pack(anchor="w")
     ttk.Label(
-        quadro_principal,
-        text="Matriz 5 x 6: clique em vaga livre para chegada e em vaga ocupada para saída.",
+        quadro_cabecalho,
+        text="Pátio logístico acadêmico • matriz 5 x 6 com 30 posições",
         style="Subtitulo.TLabel",
-    ).grid(row=1, column=0, sticky="w", pady=(3, 14))
+    ).pack(anchor="w", pady=(4, 0))
 
-    quadro_entrada = ttk.LabelFrame(quadro_principal, text="Registro de chegada", padding=10)
+    quadro_entrada = ttk.LabelFrame(
+        quadro_principal,
+        text="  Registrar chegada  ",
+        padding=12,
+        style="Cartao.TLabelframe",
+    )
     # grid() organiza o quadro por linhas e colunas dentro do quadro principal.
-    quadro_entrada.grid(row=2, column=0, sticky="ew", pady=(0, 12))
+    quadro_entrada.grid(row=1, column=0, sticky="ew", pady=(0, 12))
     # columnconfigure() deixa a coluna do campo de texto responsiva.
     quadro_entrada.columnconfigure(1, weight=1)
     ttk.Label(quadro_entrada, text="Identificação do contêiner:").grid(
@@ -213,17 +269,48 @@ def montar_interface():
     )
 
     quadro_resumo = ttk.Frame(quadro_principal)
-    # grid() posiciona os indicadores em uma linha da interface.
-    quadro_resumo.grid(row=3, column=0, sticky="w", pady=(0, 12))
-    ttk.Label(quadro_resumo, textvariable=texto_ocupadas).grid(row=0, column=0, padx=(0, 18))
-    ttk.Label(quadro_resumo, textvariable=texto_livres).grid(row=0, column=1, padx=(0, 18))
-    ttk.Label(quadro_resumo, textvariable=texto_chegadas).grid(row=0, column=2)
+    # grid() posiciona os cartões de indicadores em uma linha responsiva.
+    quadro_resumo.grid(row=2, column=0, sticky="ew", pady=(0, 12))
+    for coluna in range(3):
+        quadro_resumo.columnconfigure(coluna, weight=1)
 
-    quadro_patio = ttk.LabelFrame(quadro_principal, text="Pátio de armazenamento", padding=10)
+    cartao_ocupadas = ttk.LabelFrame(
+        quadro_resumo, text="Ocupação", padding=(12, 8), style="Cartao.TLabelframe"
+    )
+    cartao_ocupadas.grid(row=0, column=0, sticky="ew", padx=(0, 8))
+    ttk.Label(cartao_ocupadas, textvariable=texto_ocupadas, style="CartaoValor.TLabel").pack(
+        anchor="w"
+    )
+
+    cartao_livres = ttk.LabelFrame(
+        quadro_resumo, text="Disponibilidade", padding=(12, 8), style="Cartao.TLabelframe"
+    )
+    cartao_livres.grid(row=0, column=1, sticky="ew", padx=4)
+    ttk.Label(cartao_livres, textvariable=texto_livres, style="CartaoValor.TLabel").pack(
+        anchor="w"
+    )
+
+    cartao_chegadas = ttk.LabelFrame(
+        quadro_resumo, text="Movimentação", padding=(12, 8), style="Cartao.TLabelframe"
+    )
+    cartao_chegadas.grid(row=0, column=2, sticky="ew", padx=(8, 0))
+    ttk.Label(cartao_chegadas, textvariable=texto_chegadas, style="CartaoValor.TLabel").pack(
+        anchor="w"
+    )
+
+    quadro_patio = ttk.LabelFrame(
+        quadro_principal,
+        text="  Pátio de armazenamento  ",
+        padding=10,
+        style="Cartao.TLabelframe",
+    )
     # grid() faz o pátio ocupar o espaço restante da janela.
-    quadro_patio.grid(row=4, column=0, sticky="nsew")
+    quadro_patio.grid(row=3, column=0, sticky="nsew")
     # rowconfigure() permite que a linha do pátio acompanhe a altura da janela.
-    quadro_principal.rowconfigure(4, weight=1)
+    quadro_principal.rowconfigure(3, weight=1)
+
+    # Uma lista nova evita duplicação visual se a interface for remontada em uma verificação.
+    botoes = []
 
     # REPETIÇÃO: cria visualmente as 30 posições que existem na matriz 5 x 6.
     for coluna in range(COLUNAS):
@@ -247,12 +334,25 @@ def montar_interface():
         # append() adiciona a linha de botões à matriz visual, mantendo os mesmos índices.
         botoes.append(linha_de_botoes)
 
+    quadro_legenda = ttk.Frame(quadro_patio)
+    quadro_legenda.grid(row=LINHAS, column=0, columnspan=COLUNAS, sticky="w", pady=(8, 0))
+    ttk.Label(quadro_legenda, text="Legenda:").pack(side="left", padx=(0, 12))
+    ttk.Label(quadro_legenda, text="■ Livre", style="LegendaLivre.TLabel").pack(
+        side="left", padx=(0, 12)
+    )
+    ttk.Label(quadro_legenda, text="■ Ocupada", style="LegendaOcupada.TLabel").pack(
+        side="left"
+    )
+
     quadro_acoes = ttk.Frame(quadro_principal)
     # grid() posiciona o botão final abaixo do pátio.
-    quadro_acoes.grid(row=5, column=0, sticky="e", pady=(12, 0))
-    ttk.Button(quadro_acoes, text="Encerrar e mostrar resumo", command=encerrar).grid(
-        row=0, column=0
-    )
+    quadro_acoes.grid(row=4, column=0, sticky="e", pady=(12, 0))
+    ttk.Button(
+        quadro_acoes,
+        text="Encerrar e mostrar resumo",
+        style="Acao.TButton",
+        command=encerrar,
+    ).grid(row=0, column=0)
 
 
 def montar_lista_de_ocupacao():
@@ -310,7 +410,8 @@ def iniciar_aplicacao():
     # SEQUÊNCIA: cria os objetos da interface antes de apresentar os dados.
     janela = tk.Tk()
     janela.title("Controle de Contêineres")
-    janela.minsize(760, 560)
+    janela.geometry("980x720")
+    janela.minsize(820, 640)
     # StringVar() mantém texto observável para Labels e Entry sem atualizar manualmente cada widget.
     codigo_var = tk.StringVar()
     texto_ocupadas = tk.StringVar()
